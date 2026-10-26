@@ -1,42 +1,40 @@
-// Função que calcula o saldo de rankeadas e determina o nível do jogador
-function calcularRankeadas(vitorias, derrotas) {
-  const saldoVitorias = vitorias - derrotas;
-  let nivel = "";
-
-  if (vitorias <= 10) {
-    nivel = "Ferro";
-  } else if (vitorias >= 11 && vitorias <= 20) {
-    nivel = "Bronze";
-  } else if (vitorias >= 21 && vitorias <= 50) {
-    nivel = "Prata";
-  } else if (vitorias >= 51 && vitorias <= 80) {
-    nivel = "Ouro";
-  } else if (vitorias >= 81 && vitorias <= 90) {
-    nivel = "Diamante";
-  } else if (vitorias >= 91 && vitorias <= 100) {
-    nivel = "Lendário";
-  } else {
-    nivel = "Imortal";
+// Classe genérica que representa um herói de uma aventura
+class Heroi {
+  constructor(nome, idade, tipo) {
+    this.nome = nome;
+    this.idade = idade;
+    this.tipo = tipo;
   }
 
-  return { saldoVitorias, nivel };
+  // Método que define o ataque conforme o tipo e exibe a mensagem
+  atacar() {
+    let ataque = "";
+
+    if (this.tipo === "mago") {
+      ataque = "magia";
+    } else if (this.tipo === "guerreiro") {
+      ataque = "espada";
+    } else if (this.tipo === "monge") {
+      ataque = "artes marciais";
+    } else if (this.tipo === "ninja") {
+      ataque = "shuriken";
+    } else {
+      ataque = "um ataque básico";
+    }
+
+    console.log(`o ${this.tipo} atacou usando ${ataque}`);
+  }
 }
 
-// Lista de jogadores para demonstrar o laço de repetição
-const jogadores = [
-  { vitorias: 8, derrotas: 2 },
-  { vitorias: 15, derrotas: 5 },
-  { vitorias: 35, derrotas: 10 },
-  { vitorias: 65, derrotas: 20 },
-  { vitorias: 85, derrotas: 15 },
-  { vitorias: 95, derrotas: 10 },
-  { vitorias: 120, derrotas: 25 }
+// Lista de heróis para demonstrar o laço de repetição e instâncias de classe
+const herois = [
+  new Heroi("Gandalf", 1500, "mago"),
+  new Heroi("Arthur", 35, "guerreiro"),
+  new Heroi("Shaolin", 40, "monge"),
+  new Heroi("Hanzo", 28, "ninja")
 ];
 
-// Laço de repetição percorrendo cada jogador
-for (let i = 0; i < jogadores.length; i++) {
-  const jogador = jogadores[i];
-  const resultado = calcularRankeadas(jogador.vitorias, jogador.derrotas);
-
-  console.log(`O Herói tem de saldo de **${resultado.saldoVitorias}** está no nível de **${resultado.nivel}**`);
+// Laço de repetição executando o método atacar de cada herói
+for (let i = 0; i < herois.length; i++) {
+  herois[i].atacar();
 }
